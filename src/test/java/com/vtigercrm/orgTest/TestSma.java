@@ -8,5 +8,6 @@ public class TestSma
 	public void test()
 	{
 		System.out.println("MODIFIED");
+		System.out.println("Step1");
 	}
 }
