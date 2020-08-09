@@ -13,16 +13,25 @@ public class Home_Page
 	@FindBy(linkText = "Contacts")
 	private WebElement Contactlink;
 	
+	@FindBy(className = "searchBox")
+	private WebElement mainsearchbox;
+	
 	public Home_Page(WebDriver driver) 
 	{
 		PageFactory.initElements(driver, this);
 	}
 
-	public WebElement getOrglink() {
+	public WebElement getMainsearchbox() {
+		return mainsearchbox;
+	}
+
+	public WebElement getOrglink() 
+	{
 		return Orglink;
 	}
 
-	public WebElement getContactlink() {
+	public WebElement getContactlink() 
+	{
 		return Contactlink;
 	}
 	
