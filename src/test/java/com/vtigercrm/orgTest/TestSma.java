@@ -9,5 +9,6 @@ public class TestSma
 	{
 		System.out.println("MODIFIED");
 		System.out.println("Step1");
+		System.out.println("HELOO");
 	}
 }
