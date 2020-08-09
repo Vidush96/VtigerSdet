@@ -7,6 +7,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.vtigercrm.genericutils.Base_Class;
+import com.vtigercrm.objectrepositoryLib.Home_Page;
 
 /**
  * @author hp
@@ -24,7 +25,8 @@ public class CreateOrgTest extends Base_Class
 		String orgindus = elb.getExcelData("org", 1, 4);
 		
 		/*navigate to org page*/
-		driver.findElement(By.linkText("Organizations")).click();
+		Home_Page hp = new Home_Page(driver);
+		hp.getOrglink().click();
 		
 		/*navigate to create org page*/
 		driver.findElement(By.xpath("//img[@title='Create Organization...']")).click();

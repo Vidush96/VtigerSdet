@@ -7,10 +7,8 @@ public class TestSma
 	@Test
 	public void test()
 	{
-		System.out.println("step1");
-		System.out.println("step2");
-		
-		System.out.println("step3");
-		System.out.println("step4");
+		System.out.println("MODIFIED");
+		System.out.println("Step1");
+		System.out.println("HELOO");
 	}
 }

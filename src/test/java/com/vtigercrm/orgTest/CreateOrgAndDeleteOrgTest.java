@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.vtigercrm.genericutils.Base_Class;
+import com.vtigercrm.objectrepositoryLib.Home_Page;
 
 /**
  * @author hp
@@ -23,7 +24,8 @@ public class CreateOrgAndDeleteOrgTest extends Base_Class
 		String orgIN = elb.getExcelData("contact", 4, 7);
 		
 		/*navigate to org page*/
-		driver.findElement(By.linkText("Organizations")).click();
+		Home_Page hp = new Home_Page(driver);
+		hp.getOrglink().click();
 		
 		/*navigate to create org page*/
 		driver.findElement(By.xpath("//img[@title='Create Organization...']")).click();
