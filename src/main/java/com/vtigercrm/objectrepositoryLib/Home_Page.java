@@ -16,9 +16,16 @@ public class Home_Page
 	@FindBy(className = "searchBox")
 	private WebElement mainsearchbox;
 	
+	@FindBy(linkText = "Opportunities")
+	private WebElement Opportunitieslink;
+	
 	public Home_Page(WebDriver driver) 
 	{
 		PageFactory.initElements(driver, this);
+	}
+
+	public WebElement getOpportunitieslink() {
+		return Opportunitieslink;
 	}
 
 	public WebElement getMainsearchbox() {
