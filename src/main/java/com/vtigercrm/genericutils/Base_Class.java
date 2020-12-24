@@ -25,7 +25,7 @@ import com.vtigercrm.objectrepositoryLib.Vtiger_Login_Page;
  */
 /**
  * 
- * This class consists of details related to DB, Browsers
+ * This class consists of details related to DB, Browsers, Cross browsers
  *
  */
 public class Base_Class 
