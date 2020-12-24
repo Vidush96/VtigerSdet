@@ -36,6 +36,12 @@ import com.vtigercrm.objectrepositoryLib.Vtiger_Login_Page;
 
 /**
  * @author hp
+ * @author Malathi M
+ *
+ */
+/**
+ * 
+ * This class consists of details related to DB, Browsers
  *
  */
 public class Base_Class implements ITestListener
