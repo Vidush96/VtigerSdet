@@ -39,6 +39,11 @@ import com.vtigercrm.objectrepositoryLib.Vtiger_Login_Page;
  * @author Malathi M
  *
  */
+/**
+ * 
+ * This class consists of details related to DB,Browsers
+ *
+ */
 public class Base_Class implements ITestListener
 {
 	public FileLib flb =new FileLib();
