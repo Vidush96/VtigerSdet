@@ -6,7 +6,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.vtigercrm.genericutils.Base_Class;
+import com.vtigercrm.objectrepositoryLib.Common_Components;
+import com.vtigercrm.objectrepositoryLib.Create_Org_Page;
 import com.vtigercrm.objectrepositoryLib.Home_Page;
+import com.vtigercrm.objectrepositoryLib.Organizations_Page;
 
 /**
  * @author hp
@@ -28,31 +31,24 @@ public class CreateOrgAndDeleteOrgTest extends Base_Class
 		hp.getOrglink().click();
 		
 		/*navigate to create org page*/
-		driver.findElement(By.xpath("//img[@title='Create Organization...']")).click();
+		Organizations_Page Op = new Organizations_Page(driver);
+		Op.getCreateorg().click();
 		
 		/*create org and verify*/
-		driver.findElement(By.name("accountname")).sendKeys(orgname);
-		WebElement eleorgtype = driver.findElement(By.name("accounttype"));
-		wdu.select(eleorgtype, orgtype);
-		WebElement eleorgindus = driver.findElement(By.name("industry"));
-		wdu.select(eleorgindus, orgindus);
-		driver.findElement(By.xpath("//input[@title='Save [Alt+S]']")).click();
-		 String actualorgname = driver.findElement(By.xpath("//span[@class='dvHeaderText']")).getText();
-		Assert.assertTrue(actualorgname.contains(orgname));
+		Create_Org_Page cop = new Create_Org_Page(driver);
+		Common_Components cc = new Common_Components(driver, orgname);
+		cop.getOrgnameedit().sendKeys(orgname);
+		cop.getOrgindus().sendKeys(orgindus);
+		wdu.select(cop.getOrgtype(), orgtype);
+		cop.getSavebtn();
+		Assert.assertTrue(cc.getHeadername().getText().contains(orgname));
 		
 		/*Navigate to org page and verify org is present*/
-		driver.findElement(By.linkText("Organizations")).click();
-		driver.findElement(By.name("search_text")).sendKeys(orgname);
-		WebElement eleseachorgIn = driver.findElement(By.name("search_field"));
-		wdu.select(eleseachorgIn, orgIN);
-		driver.findElement(By.xpath("//input[@name='submit']")).click();
+		hp.getOrglink().click();
+		cc.getSearchtextbox().sendKeys(orgname);
+		wdu.select(cc.getSearchbyfield(), orgIN);
+		cc.getSubmit_search();
 		WebElement actorgnme = driver.findElement(By.linkText(orgname));
 		Assert.assertTrue(actorgnme.getText().contains(orgname));
-		/*Delete org*/
-		driver.findElement(By.xpath("//input[@name='selected_id']")).click();
-		driver.findElement(By.linkText("del")).click();
-		wdu.alertOk(driver);
-		WebElement msg = driver.findElement(By.xpath("//span[contains(.,'No Contact Found !')]"));
-		Assert.assertTrue(msg.isDisplayed());
 	}
 }

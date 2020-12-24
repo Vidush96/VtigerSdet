@@ -7,38 +7,40 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import com.vtigercrm.genericutils.Base_Class;
+import com.vtigercrm.objectrepositoryLib.Create_Org_Page;
 import com.vtigercrm.objectrepositoryLib.Home_Page;
+import com.vtigercrm.objectrepositoryLib.Organization_Info_Page;
+import com.vtigercrm.objectrepositoryLib.Organizations_Page;
 
 /**
  * @author hp
  *
  */
 //@Listeners(com.vtigercrm.genericutils.ListImp.class)
-public class CreateOrgTest extends Base_Class
-{
+public class CreateOrgTest extends Base_Class {
 	@Test
-	public void createOrgTest() throws Throwable
-	{
-		/*Get data from test data*/
-		String orgname = elb.getExcelData("org",1 , 2)+"_"+wdu.getRandomnumber();
+	public void createOrgTest() throws Throwable {
+		/* Get data from test data */
+		String orgname = elb.getExcelData("org", 1, 2) + "_" + wdu.getRandomnumber();
 		String orgtype = elb.getExcelData("org", 1, 3);
 		String orgindus = elb.getExcelData("org", 1, 4);
-		
-		/*navigate to org page*/
+		String orgIN = elb.getExcelData("contact", 4, 7);
+
+		/* navigate to org page */
 		Home_Page hp = new Home_Page(driver);
 		hp.getOrglink().click();
-		
-		/*navigate to create org page*/
-		driver.findElement(By.xpath("//img[@title='Create Organization...']")).click();
-		
-		/*create org and verify*/
-		driver.findElement(By.name("accountname")).sendKeys(orgname);
-		WebElement eleorgtype = driver.findElement(By.name("accounttype"));
-		wdu.select(eleorgtype, orgtype);
-		WebElement eleorgindus = driver.findElement(By.name("industry"));
-		wdu.select(eleorgindus, orgindus);
-		driver.findElement(By.xpath("//input[@title='Save [Alt+S]']")).click();
-		 String actualorgname = driver.findElement(By.xpath("//span[@class='dvHeaderText']")).getText();
-		Assert.assertTrue(actualorgname.contains(orgname));
+
+		/* navigate to create org page */
+		Organizations_Page op = new Organizations_Page(driver);
+		op.search_click(orgname, orgIN);
+		/*
+		 * op.getCreateorg().click();
+		 * 
+		 * create org Create_Org_Page cop =new Create_Org_Page(driver);
+		 * cop.createorg(orgname); verify org created Organization_Info_Page oip = new
+		 * Organization_Info_Page(driver); String actualorgname =
+		 * oip.getHeadername().getText();
+		 * Assert.assertTrue(actualorgname.contains(orgname));
+		 */
 	}
 }
