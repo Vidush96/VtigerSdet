@@ -3,17 +3,11 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.vtigercrm.orgTest.CreateOrgTest">
+      <class name="com.brainyquote.authors.GetTagsOrQuotesOf_Specific_Author">
         <methods>
-          <include name="configBS"/>
-          <include name="configBC"/>
-          <include name="configAS"/>
-          <include name="configAC"/>
-          <include name="createOrgTest"/>
-          <include name="configBM"/>
-          <include name="configAM"/>
+          <include name="getTagsOrQuotesOf_Specific_Author"/>
         </methods>
-      </class> <!-- com.vtigercrm.orgTest.CreateOrgTest -->
+      </class> <!-- com.brainyquote.authors.GetTagsOrQuotesOf_Specific_Author -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

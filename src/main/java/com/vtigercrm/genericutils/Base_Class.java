@@ -1,10 +1,25 @@
 package com.vtigercrm.genericutils;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Date;
+
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.testng.ITestListener;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -18,11 +33,12 @@ import org.testng.annotations.Parameters;
 import com.vtigercrm.objectrepositoryLib.Vtiger_Login_Page;
 
 
+
 /**
  * @author hp
  *
  */
-public class Base_Class 
+public class Base_Class implements ITestListener
 {
 	public FileLib flb =new FileLib();
 	public ExcelLib elb = new ExcelLib();
@@ -33,8 +49,9 @@ public class Base_Class
 	public void configBS()
 	{
 		/*Connect to db*/
+		
 	}
-	@BeforeClass
+	/*@BeforeClass
 	public void configBC() throws Throwable
 	{
 		String Browser = flb.getPropertyKeyValue("browser");
@@ -50,15 +67,21 @@ public class Base_Class
 		default:
 			break;
 		}
-	}
-	/*@Parameters("browser")
+	}*/
+	@Parameters("port")
 	@BeforeTest
-	public void configBT(String browser)
+	public void configBT(String port) throws MalformedURLException
 	{
-		switch (Browser) 
+		switch (port) 
 		{
-		case "chrome":
-			driver= new ChromeDriver();
+		case "5555":
+			String node_URL = "http://192.168.225.133:4444/wd/hub";
+			System.out.println("Chrome Browser initiated");
+			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+			capabilities.setBrowserName("chrome");
+			capabilities.setVersion("84.0.4147.135");
+			capabilities.setPlatform(Platform.WIN10);
+			driver = new RemoteWebDriver(new URL(node_URL), capabilities);
 			break;
 		case "firefox":
 			driver=new FirefoxDriver();
@@ -67,7 +90,7 @@ public class Base_Class
 		default:
 			break;
 		}
-	}*/
+	}
 	@BeforeMethod
 	public void configBM() throws Throwable
 	{
@@ -90,17 +113,17 @@ public class Base_Class
         wdu.moveMouseToElement(driver, wb);
 		driver.findElement(By.linkText("Sign Out")).click();
 	}
-	/*@AfterTest
+	@AfterTest
 	public void configAT()
 	{
 		driver.quit();
-	}*/
-	@AfterClass
+	}
+	/*@AfterClass
 	public void configAC()
 	{
-		/*Close the browser*/
+		//Close the browser
 		driver.quit();
-	}
+	}*/
 	@AfterSuite
 	public void configAS()
 	{
